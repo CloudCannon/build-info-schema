@@ -206,71 +206,76 @@
 		"collections-config": {
 			"type": "object",
 			"description": "Supporting information about the structured content groups on your site",
-			"properties": {
-				"path": {
-					"type": "string",
-					"description": "The base path for this collection. Should be empty or not start with a slash.",
-					"pattern": "^$|^[^\/].*"
-				},
-				"name": {
-					"type": "string"
-				},
-				"title": {
-					"type": "string"
-				},
-				"output": {
-					"type": "boolean"
-				},
-				"_sort_key": {
-					"type": "string"
-				},
-				"_subtext_key": {
-					"type": "string"
-				},
-				"_image_key": {
-					"type": "string"
-				},
-				"_image_size": {
-					"type": "string",
-					"enum": [
-						"cover",
-						"contain",
-						"unset"
-					]
-				},
-				"_singular_name": {
-					"type": "string"
-				},
-				"_singular_key": {
-					"type": "string"
-				},
-				"_disable_add": {
-					"type": "boolean"
-				},
-				"_icon": {
-					"type": "string"
-				},
-				"_add_options": {
-					"type": "array",
-					"items": {
-						"type": "object",
-						"properties": {
-							"name": {
-								"type": "string"
-							},
-							"icon": {
-								"type": "string"
-							},
-							"href": {
-								"type": "string"
+			"additionalProperties": {
+				"type": "object",
+				"properties": {
+					"path": {
+						"type": "string",
+						"description": "The base path for this collection. Should be empty or not start with a slash.",
+						"pattern": "^$|^[^\/].*"
+					},
+					"name": {
+						"type": "string",
+						"description": "Used as a label for this collection within the editor."
+					},
+					"title": {
+						"type": "string",
+						"description": "Used as a label for this collection within the editor. Used if name is unset."
+					},
+					"output": {
+						"type": "boolean"
+					},
+					"_sort_key": {
+						"type": "string"
+					},
+					"_subtext_key": {
+						"type": "string"
+					},
+					"_image_key": {
+						"type": "string"
+					},
+					"_image_size": {
+						"type": "string",
+						"enum": [
+							"cover",
+							"contain",
+							"unset"
+						]
+					},
+					"_singular_name": {
+						"type": "string"
+					},
+					"_singular_key": {
+						"type": "string"
+					},
+					"_disable_add": {
+						"type": "boolean"
+					},
+					"_icon": {
+						"type": "string"
+					},
+					"_add_options": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"name": {
+									"type": "string"
+								},
+								"icon": {
+									"type": "string"
+								},
+								"href": {
+									"type": "string"
+								}
 							}
 						}
 					}
-				}
-			},
-			"required": [
-				"path"
-			]
+				},
+				"required": [
+					"path"
+				]
+			}
 		},
 
 		"_comments": {
