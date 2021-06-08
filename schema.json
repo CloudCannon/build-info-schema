@@ -10,7 +10,6 @@
 			"description": "The time this file was created.",
 			"format": "date-time"
 		},
-
 		"cloudcannon": {
 			"name": {
 				"type": "string",
@@ -22,7 +21,6 @@
 				"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
 			}
 		},
-
 		"generator": {
 			"name": {
 				"type": "string",
@@ -48,7 +46,6 @@
 				}
 			}
 		},
-
 		"collections": {
 			"type": "object",
 			"description": "Supporting information about the structured content groups on your site.",
@@ -100,11 +97,12 @@
 							"description": "CloudCannon comments to set helper labels for front matter inputs for this file."
 						}
 					},
-					"required": ["path"]
+					"required": [
+						"path"
+					]
 				}
 			}
 		},
-
 		"data": {
 			"type": "object",
 			"description": "Raw data parts of the structured content.",
@@ -113,7 +111,6 @@
 				"description": "The data itself."
 			}
 		},
-
 		"pages": {
 			"type": "array",
 			"description": "Standalone pages.",
@@ -159,10 +156,11 @@
 						"description": "CloudCannon comments to set helper labels for front matter inputs for this file."
 					}
 				},
-				"required": ["path"]
+				"required": [
+					"path"
+				]
 			}
 		},
-
 		"static-pages": {
 			"type": "array",
 			"description": "HTML files with no front matter.",
@@ -185,24 +183,20 @@
 				]
 			}
 		},
-
 		"source": {
 			"type": "string",
 			"description": "The path to your site files",
 			"format": "uri-reference"
 		},
-
 		"timezone": {
 			"type": "string,null",
 			"description": "The timezone of your site in IANA format"
 		},
-
 		"base-url": {
 			"type": "string,null",
 			"description": "The path in your site URL after the domain and before the rest. Either empty or prefixed with a slash.",
 			"pattern": "^$|^[^\/].*"
 		},
-
 		"collections-config": {
 			"type": "object",
 			"description": "Supporting information about the structured content groups on your site",
@@ -277,7 +271,6 @@
 				]
 			}
 		},
-
 		"_comments": {
 			"type": "object",
 			"description": "Helpful labels added to the editor for the matching keys",
@@ -285,7 +278,6 @@
 				"type": "string"
 			}
 		},
-
 		"_options": {
 			"type": "object",
 			"description": "Set of options to change how inputs behave in the editor",
@@ -374,7 +366,6 @@
 				}
 			}
 		},
-
 		"_editor": {
 			"type": "object",
 			"properties": {
@@ -387,7 +378,6 @@
 				"default_path"
 			]
 		},
-
 		"_source_editor": {
 			"type": "object",
 			"description": "Visual adjustments for the source editor",
@@ -403,7 +393,6 @@
 				}
 			}
 		},
-
 		"paths": {
 			"type": "object",
 			"description": "Custom build paths used in the editor to find and place files",
@@ -440,7 +429,6 @@
 				}
 			}
 		},
-
 		"_array_structures": {
 			"type": "object",
 			"description": "Structured values for editors adding new items to arrays",
@@ -493,7 +481,6 @@
 				]
 			}
 		},
-
 		"_select_data": {
 			"type": "object",
 			"description": "Data source for populating select and multiselect inputs in the editor",
