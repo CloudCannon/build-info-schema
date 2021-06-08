@@ -178,9 +178,11 @@
 						"type": "string",
 						"description": "The output URL for this file. Should be empty or start with a slash.",
 						"pattern": "^$|^\/.*"
-					},
+					}
 				},
-				"required": ["path"]
+				"required": [
+					"path"
+				]
 			}
 		},
 
@@ -373,7 +375,7 @@
 			"properties": {
 				"default_path": {
 					"type": "string,null",
-					"description": "The path the editor opens at if no other path is given",
+					"description": "The path the editor opens at if no other path is given"
 				}
 			},
 			"required": [
