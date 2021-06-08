@@ -47,7 +47,7 @@
 			}
 		},
 		"collections": {
-			"type": "object",
+			"type": "object,null",
 			"description": "Supporting information about the structured content groups on your site.",
 			"additionalProperties": {
 				"type": "array",
@@ -57,43 +57,43 @@
 						"path": {
 							"type": "string",
 							"description": "The source path to this file. Should be empty or not start with a slash.",
-							"pattern": "^$|^[^\/].*"
+							"pattern": "^$|^[^\/].*$"
 						},
 						"url": {
-							"type": "string",
+							"type": "string,null",
 							"description": "The output URL for this file.",
-							"pattern": "^$|^\/.*"
+							"pattern": "^$|^\/.*$"
 						},
 						"collection": {
-							"type": "string",
+							"type": "string,null",
 							"description": "Reference to the containing collection."
 						},
 						"name": {
-							"type": "string",
+							"type": "string,null",
 							"description": "Used as a label for this file within the editor."
 						},
 						"title": {
-							"type": "string",
+							"type": "string,null",
 							"description": "Title for the content in the file. Used in place of name if name is unset or same as filename."
 						},
 						"_unlisted": {
-							"type": "boolean",
+							"type": "boolean,null",
 							"description": "Hides this item within the editor. Defaults to false."
 						},
 						"output": {
-							"type": "boolean",
+							"type": "boolean,null",
 							"description": "Indicates whether or not this file is in the build output. Defaults to true."
 						},
 						"published": {
-							"type": "boolean",
+							"type": "boolean,null",
 							"description": "Indicates if this file is published or a draft. Defaults to true."
 						},
 						"_options": {
-							"type": "object",
+							"type": "object,null",
 							"description": "CloudCannon input options to configure front matter inputs for this file."
 						},
 						"_comments": {
-							"type": "object",
+							"type": "object,null",
 							"description": "CloudCannon comments to set helper labels for front matter inputs for this file."
 						}
 					},
@@ -104,7 +104,7 @@
 			}
 		},
 		"data": {
-			"type": "object",
+			"type": "object,null",
 			"description": "Raw data parts of the structured content.",
 			"additionalProperties": {
 				"type": "object,array",
@@ -112,7 +112,7 @@
 			}
 		},
 		"pages": {
-			"type": "array",
+			"type": "array,null",
 			"description": "Standalone pages.",
 			"items": {
 				"type": "object",
@@ -120,39 +120,39 @@
 					"path": {
 						"type": "string",
 						"description": "The source path to this file. Should be empty or not start with a slash.",
-						"pattern": "^$|^[^\/].*"
+						"pattern": "^$|^[^\/].*$"
 					},
 					"url": {
-						"type": "string",
+						"type": "string,null",
 						"description": "The output URL for this file.",
-						"pattern": "^$|^\/.*"
+						"pattern": "^$|^\/.*$"
 					},
 					"name": {
-						"type": "string",
+						"type": "string,null",
 						"description": "Used as a label for this file within the editor."
 					},
 					"title": {
-						"type": "string",
+						"type": "string,null",
 						"description": "Title for the content in the file. Used in place of name if name is unset or same as filename."
 					},
 					"_unlisted": {
-						"type": "boolean",
+						"type": "boolean,null",
 						"description": "Hides this item within the editor. Defaults to false if unset."
 					},
 					"output": {
-						"type": "boolean",
+						"type": "boolean,null",
 						"description": "Indicates whether or not this file is in the build output. Defaults to true if unset."
 					},
 					"published": {
-						"type": "boolean",
+						"type": "boolean,null",
 						"description": "Indicates if this file is published or a draft. Defaults to true if unset."
 					},
 					"_options": {
-						"type": "object",
+						"type": "object,null",
 						"description": "CloudCannon input options to configure front matter inputs for this file."
 					},
 					"_comments": {
-						"type": "object",
+						"type": "object,null",
 						"description": "CloudCannon comments to set helper labels for front matter inputs for this file."
 					}
 				},
@@ -162,7 +162,7 @@
 			}
 		},
 		"static-pages": {
-			"type": "array",
+			"type": "array,null",
 			"description": "HTML files with no front matter.",
 			"items": {
 				"type": "object",
@@ -170,12 +170,12 @@
 					"path": {
 						"type": "string",
 						"description": "The source path to this file. Should be empty or not start with a slash.",
-						"pattern": "^$|^[^\/].*"
+						"pattern": "^$|^[^\/].*$"
 					},
 					"url": {
-						"type": "string",
+						"type": "string,null",
 						"description": "The output URL for this file. Should be empty or start with a slash.",
-						"pattern": "^$|^\/.*"
+						"pattern": "^$|^\/.*$"
 					}
 				},
 				"required": [
@@ -184,9 +184,9 @@
 			}
 		},
 		"source": {
-			"type": "string",
-			"description": "The path to your site files",
-			"format": "uri-reference"
+			"type": "string,null",
+			"description": "The path to your site files. Should be empty or not start with a slash.",
+			"pattern": "^$|^[^\/].*$"
 		},
 		"timezone": {
 			"type": "string,null",
@@ -194,8 +194,8 @@
 		},
 		"base-url": {
 			"type": "string,null",
-			"description": "The path in your site URL after the domain and before the rest. Either empty or prefixed with a slash.",
-			"pattern": "^$|^[^\/].*"
+			"description": "The path in your site URL after the domain and before the rest. Should be empty or start with a slash.",
+			"pattern": "^$|^\/.*$"
 		},
 		"collections-config": {
 			"type": "object",
@@ -206,7 +206,7 @@
 					"path": {
 						"type": "string",
 						"description": "The base path for this collection. Should be empty or not start with a slash.",
-						"pattern": "^$|^[^\/].*"
+						"pattern": "^$|^[^\/].*$"
 					},
 					"name": {
 						"type": "string",
@@ -272,14 +272,14 @@
 			}
 		},
 		"_comments": {
-			"type": "object",
+			"type": "object,null",
 			"description": "Helpful labels added to the editor for the matching keys",
 			"additionalProperties": {
 				"type": "string"
 			}
 		},
 		"_options": {
-			"type": "object",
+			"type": "object,null",
 			"description": "Set of options to change how inputs behave in the editor",
 			"additionalProperties": {
 				"type": "object",
@@ -367,7 +367,7 @@
 			}
 		},
 		"_editor": {
-			"type": "object",
+			"type": "object,null",
 			"properties": {
 				"default_path": {
 					"type": "string,null",
@@ -379,17 +379,17 @@
 			]
 		},
 		"_source_editor": {
-			"type": "object",
+			"type": "object,null",
 			"description": "Visual adjustments for the source editor",
 			"properties": {
 				"tab_size": {
-					"type": "number"
+					"type": "number,null"
 				},
 				"show_gutter": {
-					"type": "boolean"
+					"type": "boolean,null"
 				},
 				"theme": {
-					"type": "string"
+					"type": "string,null"
 				}
 			}
 		},
@@ -400,43 +400,43 @@
 				"uploads": {
 					"type": "string,null",
 					"description": "The default path for uploads. Should be empty or not start with a slash.",
-					"pattern": "^$|^[^\/].*"
+					"pattern": "^$|^[^\/].*$"
 				},
 				"data": {
 					"type": "string,null",
 					"description": "The base path containing data files. Should be empty or not start with a slash.",
-					"pattern": "^$|^[^\/].*"
+					"pattern": "^$|^[^\/].*$"
 				},
 				"pages": {
 					"type": "string,null",
 					"description": "The base path for pages. Should be empty or not start with a slash.",
-					"pattern": "^$|^[^\/].*"
+					"pattern": "^$|^[^\/].*$"
 				},
 				"collections": {
 					"type": "string,null",
 					"description": "The base path for collections. Should be empty or not start with a slash.",
-					"pattern": "^$|^[^\/].*"
+					"pattern": "^$|^[^\/].*$"
 				},
 				"includes": {
 					"type": "string,null",
 					"description": "The base path for includes. Should be empty or not start with a slash.",
-					"pattern": "^$|^[^\/].*"
+					"pattern": "^$|^[^\/].*$"
 				},
 				"layouts": {
 					"type": "string,null",
 					"description": "The base path for layouts. Should be empty or not start with a slash.",
-					"pattern": "^$|^[^\/].*"
+					"pattern": "^$|^[^\/].*$"
 				}
 			}
 		},
 		"_array_structures": {
-			"type": "object",
+			"type": "object,null",
 			"description": "Structured values for editors adding new items to arrays",
 			"additionalProperties": {
 				"type": "object",
 				"properties": {
 					"style": {
-						"type": "string",
+						"type": "string,null",
 						"enum": [
 							"select",
 							"modal"
@@ -451,16 +451,16 @@
 									"type": "string"
 								},
 								"icon": {
-									"type": "string"
+									"type": "string,null"
 								},
 								"image": {
-									"type": "string"
+									"type": "string,null"
 								},
 								"description": {
-									"type": "string"
+									"type": "string,null"
 								},
 								"tags": {
-									"type": "array",
+									"type": "array,null",
 									"items": {
 										"type": "string"
 									}
@@ -482,7 +482,7 @@
 			}
 		},
 		"_select_data": {
-			"type": "object",
+			"type": "object,null",
 			"description": "Data source for populating select and multiselect inputs in the editor",
 			"additionalProperties": {
 				"type": "object,array"
