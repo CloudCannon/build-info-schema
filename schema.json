@@ -1,0 +1,498 @@
+{
+	"$id": "https://raw.githubusercontent.com/CloudCannon/build-info-schema/v0.0.1/schema.json",
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"title": "CloudCannon build info",
+	"description": "Normalised build output information for sites across different static site generators.",
+	"type": "object",
+	"properties": {
+		"time": {
+			"type": "string",
+			"description": "The time this file was created.",
+			"format": "date-time"
+		},
+
+		"cloudcannon": {
+			"name": {
+				"type": "string",
+				"description": "The name of the plugin or extension that created this file."
+			},
+			"version": {
+				"type": "string",
+				"description": "The version of the plugin or extension that created this file.",
+				"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+			}
+		},
+
+		"generator": {
+			"name": {
+				"type": "string",
+				"description": "The name of the static site generator used to build the site."
+			},
+			"version": {
+				"type": "string",
+				"description": "The version of the static site generator used to build the site.",
+				"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+			},
+			"environment": {
+				"type": "string,null",
+				"description": "The environment in which the site was built."
+			},
+			"metadata": {
+				"type": "object",
+				"description": "Metadata about some of the tools used to build this site.",
+				"additionalProperties": {
+					"markdown": {
+						"type": "string",
+						"description": "The engine used to render markdown files."
+					}
+				}
+			}
+		},
+
+		"collections": {
+			"type": "object",
+			"description": "Supporting information about the structured content groups on your site.",
+			"additionalProperties": {
+				"type": "array",
+				"description": "A structured content group of files.",
+				"items": {
+					"properties": {
+						"path": {
+							"type": "string",
+							"description": "The source path to this file. Should be empty or not start with a slash.",
+							"pattern": "^$|^[^\/].*"
+						},
+						"url": {
+							"type": "string",
+							"description": "The output URL for this file.",
+							"pattern": "^$|^\/.*"
+						},
+						"collection": {
+							"type": "string",
+							"description": "Reference to the containing collection."
+						},
+						"name": {
+							"type": "string",
+							"description": "Used as a label for this file within the editor."
+						},
+						"title": {
+							"type": "string",
+							"description": "Title for the content in the file. Used in place of name if name is unset or same as filename."
+						},
+						"_unlisted": {
+							"type": "boolean",
+							"description": "Hides this item within the editor. Defaults to false."
+						},
+						"output": {
+							"type": "boolean",
+							"description": "Indicates whether or not this file is in the build output. Defaults to true."
+						},
+						"published": {
+							"type": "boolean",
+							"description": "Indicates if this file is published or a draft. Defaults to true."
+						},
+						"_options": {
+							"type": "object",
+							"description": "CloudCannon input options to configure front matter inputs for this file."
+						},
+						"_comments": {
+							"type": "object",
+							"description": "CloudCannon comments to set helper labels for front matter inputs for this file."
+						}
+					},
+					"required": ["path"]
+				}
+			}
+		},
+
+		"data": {
+			"type": "object",
+			"description": "Raw data parts of the structured content.",
+			"additionalProperties": {
+				"type": "object,array",
+				"description": "The data itself."
+			}
+		},
+
+		"pages": {
+			"type": "array",
+			"description": "Standalone pages.",
+			"items": {
+				"type": "object",
+				"properties": {
+					"path": {
+						"type": "string",
+						"description": "The source path to this file. Should be empty or not start with a slash.",
+						"pattern": "^$|^[^\/].*"
+					},
+					"url": {
+						"type": "string",
+						"description": "The output URL for this file.",
+						"pattern": "^$|^\/.*"
+					},
+					"name": {
+						"type": "string",
+						"description": "Used as a label for this file within the editor."
+					},
+					"title": {
+						"type": "string",
+						"description": "Title for the content in the file. Used in place of name if name is unset or same as filename."
+					},
+					"_unlisted": {
+						"type": "boolean",
+						"description": "Hides this item within the editor. Defaults to false if unset."
+					},
+					"output": {
+						"type": "boolean",
+						"description": "Indicates whether or not this file is in the build output. Defaults to true if unset."
+					},
+					"published": {
+						"type": "boolean",
+						"description": "Indicates if this file is published or a draft. Defaults to true if unset."
+					},
+					"_options": {
+						"type": "object",
+						"description": "CloudCannon input options to configure front matter inputs for this file."
+					},
+					"_comments": {
+						"type": "object",
+						"description": "CloudCannon comments to set helper labels for front matter inputs for this file."
+					}
+				},
+				"required": ["path"]
+			}
+		},
+
+		"static-pages": {
+			"type": "array",
+			"description": "HTML files with no front matter.",
+			"items": {
+				"type": "object",
+				"properties": {
+					"path": {
+						"type": "string",
+						"description": "The source path to this file. Should be empty or not start with a slash.",
+						"pattern": "^$|^[^\/].*"
+					},
+					"url": {
+						"type": "string",
+						"description": "The output URL for this file. Should be empty or start with a slash.",
+						"pattern": "^$|^\/.*"
+					},
+				},
+				"required": ["path"]
+			}
+		},
+
+		"source": {
+			"type": "string",
+			"description": "The path to your site files",
+			"format": "uri-reference"
+		},
+
+		"timezone": {
+			"type": "string,null",
+			"description": "The timezone of your site in IANA format"
+		},
+
+		"base-url": {
+			"type": "string,null",
+			"description": "The path in your site URL after the domain and before the rest. Either empty or prefixed with a slash.",
+			"pattern": "^$|^[^\/].*"
+		},
+
+		"collections-config": {
+			"type": "object",
+			"description": "Supporting information about the structured content groups on your site",
+			"properties": {
+				"path": {
+					"type": "string",
+					"description": "The base path for this collection. Should be empty or not start with a slash.",
+					"pattern": "^$|^[^\/].*"
+				},
+				"name": {
+					"type": "string"
+				},
+				"title": {
+					"type": "string"
+				},
+				"output": {
+					"type": "boolean"
+				},
+				"_sort_key": {
+					"type": "string"
+				},
+				"_subtext_key": {
+					"type": "string"
+				},
+				"_image_key": {
+					"type": "string"
+				},
+				"_image_size": {
+					"type": "string",
+					"enum": [
+						"cover",
+						"contain",
+						"unset"
+					]
+				},
+				"_singular_name": {
+					"type": "string"
+				},
+				"_singular_key": {
+					"type": "string"
+				},
+				"_disable_add": {
+					"type": "boolean"
+				},
+				"_icon": {
+					"type": "string"
+				},
+				"_add_options": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"name": {
+								"type": "string"
+							},
+							"icon": {
+								"type": "string"
+							},
+							"href": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			},
+			"required": [
+				"path"
+			]
+		},
+
+		"_comments": {
+			"type": "object",
+			"description": "Helpful labels added to the editor for the matching keys",
+			"additionalProperties": {
+				"type": "string"
+			}
+		},
+
+		"_options": {
+			"type": "object",
+			"description": "Set of options to change how inputs behave in the editor",
+			"additionalProperties": {
+				"type": "object",
+				"properties": {
+					"bold": {
+						"type": "boolean"
+					},
+					"italic": {
+						"type": "boolean"
+					},
+					"removeformat": {
+						"type": "boolean"
+					},
+					"link": {
+						"type": "boolean"
+					},
+					"undo": {
+						"type": "boolean"
+					},
+					"redo": {
+						"type": "boolean"
+					},
+					"underline": {
+						"type": "boolean"
+					},
+					"strike": {
+						"type": "boolean"
+					},
+					"subscript": {
+						"type": "boolean"
+					},
+					"superscript": {
+						"type": "boolean"
+					},
+					"code": {
+						"type": "boolean"
+					},
+					"format": {
+						"type": "boolean,string"
+					},
+					"blockquote": {
+						"type": "boolean"
+					},
+					"horizontalrule": {
+						"type": "boolean"
+					},
+					"numberedlist": {
+						"type": "boolean"
+					},
+					"bulletedlist": {
+						"type": "boolean"
+					},
+					"outdent": {
+						"type": "boolean"
+					},
+					"indent": {
+						"type": "boolean"
+					},
+					"image": {
+						"type": "boolean"
+					},
+					"embed": {
+						"type": "boolean"
+					},
+					"table": {
+						"type": "boolean"
+					},
+					"styles": {
+						"type": "string",
+						"description": "The path or URL to the stylesheet used for editor styles."
+					},
+					"left": {
+						"type": "boolean,string"
+					},
+					"center": {
+						"type": "boolean,string"
+					},
+					"right": {
+						"type": "boolean,string"
+					},
+					"justify": {
+						"type": "boolean,string"
+					}
+				}
+			}
+		},
+
+		"_editor": {
+			"type": "object",
+			"properties": {
+				"default_path": {
+					"type": "string,null",
+					"description": "The path the editor opens at if no other path is given",
+				}
+			},
+			"required": [
+				"default_path"
+			]
+		},
+
+		"_source_editor": {
+			"type": "object",
+			"description": "Visual adjustments for the source editor",
+			"properties": {
+				"tab_size": {
+					"type": "number"
+				},
+				"show_gutter": {
+					"type": "boolean"
+				},
+				"theme": {
+					"type": "string"
+				}
+			}
+		},
+
+		"paths": {
+			"type": "object",
+			"description": "Custom build paths used in the editor to find and place files",
+			"properties": {
+				"uploads": {
+					"type": "string,null",
+					"description": "The default path for uploads. Should be empty or not start with a slash.",
+					"pattern": "^$|^[^\/].*"
+				},
+				"data": {
+					"type": "string,null",
+					"description": "The base path containing data files. Should be empty or not start with a slash.",
+					"pattern": "^$|^[^\/].*"
+				},
+				"pages": {
+					"type": "string,null",
+					"description": "The base path for pages. Should be empty or not start with a slash.",
+					"pattern": "^$|^[^\/].*"
+				},
+				"collections": {
+					"type": "string,null",
+					"description": "The base path for collections. Should be empty or not start with a slash.",
+					"pattern": "^$|^[^\/].*"
+				},
+				"includes": {
+					"type": "string,null",
+					"description": "The base path for includes. Should be empty or not start with a slash.",
+					"pattern": "^$|^[^\/].*"
+				},
+				"layouts": {
+					"type": "string,null",
+					"description": "The base path for layouts. Should be empty or not start with a slash.",
+					"pattern": "^$|^[^\/].*"
+				}
+			}
+		},
+
+		"_array_structures": {
+			"type": "object",
+			"description": "Structured values for editors adding new items to arrays",
+			"additionalProperties": {
+				"type": "object",
+				"properties": {
+					"style": {
+						"type": "string",
+						"enum": [
+							"select",
+							"modal"
+						]
+					},
+					"values": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"label": {
+									"type": "string"
+								},
+								"icon": {
+									"type": "string"
+								},
+								"image": {
+									"type": "string"
+								},
+								"description": {
+									"type": "string"
+								},
+								"tags": {
+									"type": "array",
+									"items": {
+										"type": "string"
+									}
+								},
+								"value": {
+									"type": "object"
+								}
+							},
+							"required": [
+								"label",
+								"value"
+							]
+						}
+					}
+				},
+				"required": [
+					"values"
+				]
+			}
+		},
+
+		"_select_data": {
+			"type": "object",
+			"description": "Data source for populating select and multiselect inputs in the editor",
+			"additionalProperties": {
+				"type": "object,array"
+			}
+		}
+	}
+}
