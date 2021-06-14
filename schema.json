@@ -90,11 +90,23 @@
 						},
 						"_options": {
 							"type": "object,null",
-							"description": "CloudCannon input options to configure front matter inputs for this file."
+							"description": "Configurable options for front matter inputs for this file."
 						},
 						"_comments": {
 							"type": "object,null",
-							"description": "CloudCannon comments to set helper labels for front matter inputs for this file."
+							"description": "Comments to set helper labels for front matter inputs for this file."
+						},
+						"_enabled_editors": {
+							"type": "array,null",
+							"description": "Priority list of editors available for this file.",
+							"items": {
+								"type": "string",
+								"enum": [
+									"content",
+									"data",
+									"visual"
+								]
+							}
 						}
 					},
 					"required": [
@@ -149,11 +161,23 @@
 					},
 					"_options": {
 						"type": "object,null",
-						"description": "CloudCannon input options to configure front matter inputs for this file."
+						"description": "Configurable options for front matter inputs for this file."
 					},
 					"_comments": {
 						"type": "object,null",
-						"description": "CloudCannon comments to set helper labels for front matter inputs for this file."
+						"description": "Comments to set helper labels for front matter inputs for this file."
+					},
+					"_enabled_editors": {
+						"type": "array,null",
+						"description": "Priority list of editors available for this file.",
+						"items": {
+							"type": "string",
+							"enum": [
+								"content",
+								"data",
+								"visual"
+							]
+						}
 					}
 				},
 				"required": [
@@ -264,6 +288,18 @@
 								}
 							}
 						}
+					},
+					"_enabled_editors": {
+						"type": "array,null",
+						"description": "Priority list of editors available for this file.",
+						"items": {
+							"type": "string",
+							"enum": [
+								"content",
+								"data",
+								"visual"
+							]
+						}
 					}
 				},
 				"required": [
@@ -276,6 +312,18 @@
 			"description": "Helpful labels added to the editor for the matching keys",
 			"additionalProperties": {
 				"type": "string"
+			}
+		},
+		"_enabled_editors": {
+			"type": "array,null",
+			"description": "Priority list of editors available for this file.",
+			"items": {
+				"type": "string",
+				"enum": [
+					"content",
+					"data",
+					"visual"
+				]
 			}
 		},
 		"_options": {
@@ -362,6 +410,26 @@
 					},
 					"justify": {
 						"type": "boolean,string"
+					}
+				}
+			}
+		},
+		"_collection_groups": {
+			"type": "array,null",
+			"description": "Overrides for collection groups displayed in the editor sidebar.",
+			"items": {
+				"type": "object",
+				"properties": {
+					"heading": {
+						"type": "string",
+						"description": "The text displayed above this group"
+					},
+					"collections": {
+						"type": "array",
+						"description": "List of the names of collections to be displayed in this group",
+						"items": {
+							"type": "string"
+						}
 					}
 				}
 			}
