@@ -1,14 +1,14 @@
 {
-	"$id": "https://raw.githubusercontent.com/CloudCannon/build-info-schema/v0.0.1/schema.json",
+	"$id": "https://raw.githubusercontent.com/CloudCannon/build-info-schema/v0.0.2/schema.json",
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"title": "CloudCannon build info",
 	"description": "Normalised build output information for sites across different static site generators.",
 	"type": "object",
 	"properties": {
-		"time": {
-			"type": "string",
-			"description": "The time this file was created.",
-			"format": "date-time"
+		"base-url": {
+			"type": "string,null",
+			"description": "The path in your site URL after the domain and before the rest. Should be empty or start with a slash.",
+			"pattern": "^$|^\/.*$"
 		},
 		"cloudcannon": {
 			"name": {
@@ -19,31 +19,6 @@
 				"type": "string",
 				"description": "The version of the plugin or extension that created this file.",
 				"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
-			}
-		},
-		"generator": {
-			"name": {
-				"type": "string",
-				"description": "The name of the static site generator used to build the site."
-			},
-			"version": {
-				"type": "string",
-				"description": "The version of the static site generator used to build the site.",
-				"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
-			},
-			"environment": {
-				"type": "string,null",
-				"description": "The environment in which the site was built."
-			},
-			"metadata": {
-				"type": "object",
-				"description": "Metadata about some of the tools used to build this site.",
-				"additionalProperties": {
-					"markdown": {
-						"type": "string",
-						"description": "The engine used to render markdown files."
-					}
-				}
 			}
 		},
 		"collections": {
@@ -114,112 +89,6 @@
 					]
 				}
 			}
-		},
-		"data": {
-			"type": "object,null",
-			"description": "Raw data parts of the structured content.",
-			"additionalProperties": {
-				"type": "object,array",
-				"description": "The data itself."
-			}
-		},
-		"pages": {
-			"type": "array,null",
-			"description": "Standalone pages.",
-			"items": {
-				"type": "object",
-				"properties": {
-					"path": {
-						"type": "string",
-						"description": "The source path to this file. Should be empty or not start with a slash.",
-						"pattern": "^$|^[^\/].*$"
-					},
-					"url": {
-						"type": "string,null",
-						"description": "The output URL for this file.",
-						"pattern": "^$|^\/.*$"
-					},
-					"name": {
-						"type": "string,null",
-						"description": "Used as a label for this file within the editor."
-					},
-					"title": {
-						"type": "string,null",
-						"description": "Title for the content in the file. Used in place of name if name is unset or same as filename."
-					},
-					"_unlisted": {
-						"type": "boolean,null",
-						"description": "Hides this item within the editor. Defaults to false if unset."
-					},
-					"output": {
-						"type": "boolean,null",
-						"description": "Indicates whether or not this file is in the build output. Defaults to true if unset."
-					},
-					"published": {
-						"type": "boolean,null",
-						"description": "Indicates if this file is published or a draft. Defaults to true if unset."
-					},
-					"_options": {
-						"type": "object,null",
-						"description": "Configurable options for front matter inputs for this file."
-					},
-					"_comments": {
-						"type": "object,null",
-						"description": "Comments to set helper labels for front matter inputs for this file."
-					},
-					"_enabled_editors": {
-						"type": "array,null",
-						"description": "Priority list of editors available for this file.",
-						"items": {
-							"type": "string",
-							"enum": [
-								"content",
-								"data",
-								"visual"
-							]
-						}
-					}
-				},
-				"required": [
-					"path"
-				]
-			}
-		},
-		"static-pages": {
-			"type": "array,null",
-			"description": "HTML files with no front matter.",
-			"items": {
-				"type": "object",
-				"properties": {
-					"path": {
-						"type": "string",
-						"description": "The source path to this file. Should be empty or not start with a slash.",
-						"pattern": "^$|^[^\/].*$"
-					},
-					"url": {
-						"type": "string,null",
-						"description": "The output URL for this file. Should be empty or start with a slash.",
-						"pattern": "^$|^\/.*$"
-					}
-				},
-				"required": [
-					"path"
-				]
-			}
-		},
-		"source": {
-			"type": "string,null",
-			"description": "The path to your site files. Should be empty or not start with a slash.",
-			"pattern": "^$|^[^\/].*$"
-		},
-		"timezone": {
-			"type": "string,null",
-			"description": "The timezone of your site in IANA format"
-		},
-		"base-url": {
-			"type": "string,null",
-			"description": "The path in your site URL after the domain and before the rest. Should be empty or start with a slash.",
-			"pattern": "^$|^\/.*$"
 		},
 		"collections-config": {
 			"type": "object",
@@ -307,12 +176,179 @@
 				]
 			}
 		},
+		"data": {
+			"type": "object,null",
+			"description": "Raw data parts of the structured content.",
+			"additionalProperties": {
+				"type": "object,array",
+				"description": "The data itself."
+			}
+		},
+		"generator": {
+			"name": {
+				"type": "string",
+				"description": "The name of the static site generator used to build the site."
+			},
+			"version": {
+				"type": "string",
+				"description": "The version of the static site generator used to build the site.",
+				"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+			},
+			"environment": {
+				"type": "string,null",
+				"description": "The environment in which the site was built."
+			},
+			"metadata": {
+				"type": "object",
+				"description": "Metadata about some of the tools used to build this site.",
+				"additionalProperties": {
+					"markdown": {
+						"type": "string",
+						"description": "The engine used to render markdown files."
+					}
+				}
+			}
+		},
+		"paths": {
+			"type": "object",
+			"description": "Custom build paths used in the editor to find and place files",
+			"properties": {
+				"static": {
+					"type": "string,null",
+					"description": "The default path for static assets. Should be empty or not start with a slash.",
+					"pattern": "^$|^[^\/].*$"
+				},
+				"uploads": {
+					"type": "string,null",
+					"description": "The default path for uploads. Should be empty or not start with a slash.",
+					"pattern": "^$|^[^\/].*$"
+				},
+				"data": {
+					"type": "string,null",
+					"description": "The base path containing data files. Should be empty or not start with a slash.",
+					"pattern": "^$|^[^\/].*$"
+				},
+				"collections": {
+					"type": "string,null",
+					"description": "The base path for collections. Should be empty or not start with a slash.",
+					"pattern": "^$|^[^\/].*$"
+				},
+				"layouts": {
+					"type": "string,null",
+					"description": "The base path for layouts. Should be empty or not start with a slash.",
+					"pattern": "^$|^[^\/].*$"
+				}
+			}
+		},
+		"source": {
+			"type": "string,null",
+			"description": "The path to your site files. Should be empty or not start with a slash.",
+			"pattern": "^$|^[^\/].*$"
+		},
+		"time": {
+			"type": "string",
+			"description": "The time this file was created.",
+			"format": "date-time"
+		},
+		"timezone": {
+			"type": "string,null",
+			"description": "The timezone of your site in IANA format"
+		},
+		"version": {
+			"type": "string",
+			"description": "The schema version this file is based on.",
+			"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+		},
+		"_array_structures": {
+			"type": "object,null",
+			"description": "Structured values for editors adding new items to arrays",
+			"additionalProperties": {
+				"type": "object",
+				"properties": {
+					"style": {
+						"type": "string,null",
+						"enum": [
+							"select",
+							"modal"
+						]
+					},
+					"values": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"label": {
+									"type": "string"
+								},
+								"icon": {
+									"type": "string,null"
+								},
+								"image": {
+									"type": "string,null"
+								},
+								"description": {
+									"type": "string,null"
+								},
+								"tags": {
+									"type": "array,null",
+									"items": {
+										"type": "string"
+									}
+								},
+								"value": {
+									"type": "object"
+								}
+							},
+							"required": [
+								"label",
+								"value"
+							]
+						}
+					}
+				},
+				"required": [
+					"values"
+				]
+			}
+		},
+		"_collection_groups": {
+			"type": "array,null",
+			"description": "Overrides for collection groups displayed in the editor sidebar.",
+			"items": {
+				"type": "object",
+				"properties": {
+					"heading": {
+						"type": "string",
+						"description": "The text displayed above this group"
+					},
+					"collections": {
+						"type": "array",
+						"description": "List of the names of collections to be displayed in this group",
+						"items": {
+							"type": "string"
+						}
+					}
+				}
+			}
+		},
 		"_comments": {
 			"type": "object,null",
 			"description": "Helpful labels added to the editor for the matching keys",
 			"additionalProperties": {
 				"type": "string"
 			}
+		},
+		"_editor": {
+			"type": "object,null",
+			"properties": {
+				"default_path": {
+					"type": "string,null",
+					"description": "The path the editor opens at if no other path is given"
+				}
+			},
+			"required": [
+				"default_path"
+			]
 		},
 		"_enabled_editors": {
 			"type": "array,null",
@@ -414,37 +450,12 @@
 				}
 			}
 		},
-		"_collection_groups": {
-			"type": "array,null",
-			"description": "Overrides for collection groups displayed in the editor sidebar.",
-			"items": {
-				"type": "object",
-				"properties": {
-					"heading": {
-						"type": "string",
-						"description": "The text displayed above this group"
-					},
-					"collections": {
-						"type": "array",
-						"description": "List of the names of collections to be displayed in this group",
-						"items": {
-							"type": "string"
-						}
-					}
-				}
-			}
-		},
-		"_editor": {
+		"_select_data": {
 			"type": "object,null",
-			"properties": {
-				"default_path": {
-					"type": "string,null",
-					"description": "The path the editor opens at if no other path is given"
-				}
-			},
-			"required": [
-				"default_path"
-			]
+			"description": "Data source for populating select and multiselect inputs in the editor",
+			"additionalProperties": {
+				"type": "object,array"
+			}
 		},
 		"_source_editor": {
 			"type": "object,null",
@@ -459,101 +470,6 @@
 				"theme": {
 					"type": "string,null"
 				}
-			}
-		},
-		"paths": {
-			"type": "object",
-			"description": "Custom build paths used in the editor to find and place files",
-			"properties": {
-				"uploads": {
-					"type": "string,null",
-					"description": "The default path for uploads. Should be empty or not start with a slash.",
-					"pattern": "^$|^[^\/].*$"
-				},
-				"data": {
-					"type": "string,null",
-					"description": "The base path containing data files. Should be empty or not start with a slash.",
-					"pattern": "^$|^[^\/].*$"
-				},
-				"pages": {
-					"type": "string,null",
-					"description": "The base path for pages. Should be empty or not start with a slash.",
-					"pattern": "^$|^[^\/].*$"
-				},
-				"collections": {
-					"type": "string,null",
-					"description": "The base path for collections. Should be empty or not start with a slash.",
-					"pattern": "^$|^[^\/].*$"
-				},
-				"includes": {
-					"type": "string,null",
-					"description": "The base path for includes. Should be empty or not start with a slash.",
-					"pattern": "^$|^[^\/].*$"
-				},
-				"layouts": {
-					"type": "string,null",
-					"description": "The base path for layouts. Should be empty or not start with a slash.",
-					"pattern": "^$|^[^\/].*$"
-				}
-			}
-		},
-		"_array_structures": {
-			"type": "object,null",
-			"description": "Structured values for editors adding new items to arrays",
-			"additionalProperties": {
-				"type": "object",
-				"properties": {
-					"style": {
-						"type": "string,null",
-						"enum": [
-							"select",
-							"modal"
-						]
-					},
-					"values": {
-						"type": "array",
-						"items": {
-							"type": "object",
-							"properties": {
-								"label": {
-									"type": "string"
-								},
-								"icon": {
-									"type": "string,null"
-								},
-								"image": {
-									"type": "string,null"
-								},
-								"description": {
-									"type": "string,null"
-								},
-								"tags": {
-									"type": "array,null",
-									"items": {
-										"type": "string"
-									}
-								},
-								"value": {
-									"type": "object"
-								}
-							},
-							"required": [
-								"label",
-								"value"
-							]
-						}
-					}
-				},
-				"required": [
-					"values"
-				]
-			}
-		},
-		"_select_data": {
-			"type": "object,null",
-			"description": "Data source for populating select and multiselect inputs in the editor",
-			"additionalProperties": {
-				"type": "object,array"
 			}
 		}
 	}
