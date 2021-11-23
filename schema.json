@@ -1,23 +1,23 @@
 {
-	"$id": "https://raw.githubusercontent.com/CloudCannon/build-info-schema/v0.0.2/schema.json",
+	"$id": "https://raw.githubusercontent.com/CloudCannon/build-info-schema/v0.0.3/schema.json",
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"title": "CloudCannon build info",
 	"description": "Normalised build output information for sites across different static site generators.",
 	"type": "object",
 	"properties": {
-		"base-url": {
+		"base_url": {
 			"type": "string,null",
-			"description": "The path in your site URL after the domain and before the rest. Should be empty or start with a slash.",
+			"description": "Path in your site URL after the domain and before the rest. Should be empty or start with a slash.",
 			"pattern": "^$|^\/.*$"
 		},
 		"cloudcannon": {
 			"name": {
 				"type": "string",
-				"description": "The name of the plugin or extension that created this file."
+				"description": "Name of the plugin or tool that created this file."
 			},
 			"version": {
 				"type": "string",
-				"description": "The version of the plugin or extension that created this file.",
+				"description": "Version of the plugin or tool that created this file.",
 				"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
 			}
 		},
@@ -31,12 +31,12 @@
 					"properties": {
 						"path": {
 							"type": "string",
-							"description": "The source path to this file. Should be empty or not start with a slash.",
+							"description": "Source path to this file. Should be empty or not start with a slash.",
 							"pattern": "^$|^[^\/].*$"
 						},
 						"url": {
 							"type": "string,null",
-							"description": "The output URL for this file.",
+							"description": "Output URL for this file.",
 							"pattern": "^$|^\/.*$"
 						},
 						"collection": {
@@ -57,31 +57,26 @@
 						},
 						"output": {
 							"type": "boolean,null",
-							"description": "Indicates whether or not this file is in the build output. Defaults to true."
+							"description": "Indicates whether or not this file is in the build output. Defaults to false."
 						},
 						"published": {
 							"type": "boolean,null",
 							"description": "Indicates if this file is published or a draft. Defaults to true."
 						},
-						"_options": {
-							"type": "object,null",
-							"description": "Configurable options for front matter inputs for this file."
+						"_editables": {
+							"type": "object,null"
 						},
-						"_comments": {
-							"type": "object,null",
-							"description": "Comments to set helper labels for front matter inputs for this file."
+						"_inputs": {
+							"type": "object,null"
+						},
+						"_structures": {
+							"type": "object,null"
+						},
+						"_select_data": {
+							"type": "object,null"
 						},
 						"_enabled_editors": {
-							"type": "array,null",
-							"description": "Priority list of editors available for this file.",
-							"items": {
-								"type": "string",
-								"enum": [
-									"content",
-									"data",
-									"visual"
-								]
-							}
+							"type": "array,null"
 						}
 					},
 					"required": [
@@ -90,7 +85,7 @@
 				}
 			}
 		},
-		"collections-config": {
+		"collections_config": {
 			"type": "object",
 			"description": "Supporting information about the structured content groups on your site",
 			"additionalProperties": {
@@ -98,7 +93,7 @@
 				"properties": {
 					"path": {
 						"type": "string",
-						"description": "The base path for this collection. Should be empty or not start with a slash.",
+						"description": "Base path for this collection. Should be empty or not start with a slash.",
 						"pattern": "^$|^[^\/].*$"
 					},
 					"name": {
@@ -112,16 +107,16 @@
 					"output": {
 						"type": "boolean"
 					},
-					"_sort_key": {
+					"sort_key": {
 						"type": "string"
 					},
-					"_subtext_key": {
+					"subtext_key": {
 						"type": "string"
 					},
-					"_image_key": {
+					"image_key": {
 						"type": "string"
 					},
-					"_image_size": {
+					"image_size": {
 						"type": "string",
 						"enum": [
 							"cover",
@@ -129,19 +124,19 @@
 							"unset"
 						]
 					},
-					"_singular_name": {
+					"singular_name": {
 						"type": "string"
 					},
-					"_singular_key": {
+					"singular_key": {
 						"type": "string"
 					},
-					"_disable_add": {
+					"disable_add": {
 						"type": "boolean"
 					},
-					"_icon": {
+					"icon": {
 						"type": "string"
 					},
-					"_add_options": {
+					"add_options": {
 						"type": "array",
 						"items": {
 							"type": "object",
@@ -158,17 +153,20 @@
 							}
 						}
 					},
+					"_editables": {
+						"type": "object,null"
+					},
+					"_inputs": {
+						"type": "object,null"
+					},
+					"_structures": {
+						"type": "object,null"
+					},
+					"_select_data": {
+						"type": "object,null"
+					},
 					"_enabled_editors": {
-						"type": "array,null",
-						"description": "Priority list of editors available for this file.",
-						"items": {
-							"type": "string",
-							"enum": [
-								"content",
-								"data",
-								"visual"
-							]
-						}
+						"type": "array,null"
 					}
 				},
 				"required": [
@@ -180,31 +178,34 @@
 			"type": "object,null",
 			"description": "Raw data parts of the structured content.",
 			"additionalProperties": {
-				"type": "object,array",
-				"description": "The data itself."
+				"type": "object,array"
 			}
 		},
 		"generator": {
-			"name": {
-				"type": "string",
-				"description": "The name of the static site generator used to build the site."
-			},
-			"version": {
-				"type": "string",
-				"description": "The version of the static site generator used to build the site.",
-				"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
-			},
-			"environment": {
-				"type": "string,null",
-				"description": "The environment in which the site was built."
-			},
-			"metadata": {
-				"type": "object",
-				"description": "Metadata about some of the tools used to build this site.",
-				"additionalProperties": {
-					"markdown": {
-						"type": "string",
-						"description": "The engine used to render markdown files."
+			"type": "object",
+			"description": "Details on the static site generator used to build the site.",
+			"properties": {
+				"name": {
+					"type": "string",
+					"description": "Name of the static site generator used to build the site."
+				},
+				"version": {
+					"type": "string",
+					"description": "Version of the static site generator used to build the site.",
+					"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+				},
+				"environment": {
+					"type": "string,null",
+					"description": "Environment in which the site was built."
+				},
+				"metadata": {
+					"type": "object",
+					"description": "Metadata about some of the tools used to build this site.",
+					"properties": {
+						"markdown": {
+							"type": "string",
+							"description": "Engine used to render markdown files."
+						}
 					}
 				}
 			}
@@ -215,51 +216,51 @@
 			"properties": {
 				"static": {
 					"type": "string,null",
-					"description": "The default path for static assets. Should be empty or not start with a slash.",
+					"description": "Default path for static assets. Should be empty or not start with a slash.",
 					"pattern": "^$|^[^\/].*$"
 				},
 				"uploads": {
 					"type": "string,null",
-					"description": "The default path for uploads. Should be empty or not start with a slash.",
+					"description": "Default path for uploads. Should be empty or not start with a slash.",
 					"pattern": "^$|^[^\/].*$"
 				},
 				"data": {
 					"type": "string,null",
-					"description": "The base path containing data files. Should be empty or not start with a slash.",
+					"description": "Base path containing data files. Should be empty or not start with a slash.",
 					"pattern": "^$|^[^\/].*$"
 				},
 				"collections": {
 					"type": "string,null",
-					"description": "The base path for collections. Should be empty or not start with a slash.",
+					"description": "Base path for collections. Should be empty or not start with a slash.",
 					"pattern": "^$|^[^\/].*$"
 				},
 				"layouts": {
 					"type": "string,null",
-					"description": "The base path for layouts. Should be empty or not start with a slash.",
+					"description": "Base path for layouts. Should be empty or not start with a slash.",
 					"pattern": "^$|^[^\/].*$"
 				}
 			}
 		},
 		"source": {
 			"type": "string,null",
-			"description": "The path to your site files. Should be empty or not start with a slash.",
+			"description": "Path to your site files. Should be empty or not start with a slash.",
 			"pattern": "^$|^[^\/].*$"
 		},
 		"time": {
 			"type": "string",
-			"description": "The time this file was created.",
+			"description": "Time this file was created.",
 			"format": "date-time"
 		},
 		"timezone": {
 			"type": "string,null",
-			"description": "The timezone of your site in IANA format"
+			"description": "Timezone of your site in IANA format"
 		},
 		"version": {
 			"type": "string",
-			"description": "The schema version this file is based on.",
+			"description": "Schema version this file is based on.",
 			"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
 		},
-		"_array_structures": {
+		"_structures": {
 			"type": "object,null",
 			"description": "Structured values for editors adding new items to arrays",
 			"additionalProperties": {
@@ -311,7 +312,7 @@
 				]
 			}
 		},
-		"_collection_groups": {
+		"collection_groups": {
 			"type": "array,null",
 			"description": "Overrides for collection groups displayed in the editor sidebar.",
 			"items": {
@@ -319,7 +320,7 @@
 				"properties": {
 					"heading": {
 						"type": "string",
-						"description": "The text displayed above this group"
+						"description": "Text displayed above this group"
 					},
 					"collections": {
 						"type": "array",
@@ -331,19 +332,26 @@
 				}
 			}
 		},
-		"_comments": {
+		"_inputs": {
 			"type": "object,null",
-			"description": "Helpful labels added to the editor for the matching keys",
+			"description": "Configuration for inputs in the Data Editor",
 			"additionalProperties": {
-				"type": "string"
+				"type": "object"
 			}
 		},
-		"_editor": {
+		"_editables": {
+			"type": "object,null",
+			"description": "Configuration for Editable Regions in the Visual Editor, and the content section in the Content Editor",
+			"additionalProperties": {
+				"type": "object"
+			}
+		},
+		"editor": {
 			"type": "object,null",
 			"properties": {
 				"default_path": {
 					"type": "string,null",
-					"description": "The path the editor opens at if no other path is given"
+					"description": "Path the editor opens at if no other path is given"
 				}
 			},
 			"required": [
@@ -352,7 +360,7 @@
 		},
 		"_enabled_editors": {
 			"type": "array,null",
-			"description": "Priority list of editors available for this file.",
+			"description": "Priority list of editors available for files.",
 			"items": {
 				"type": "string",
 				"enum": [
@@ -362,94 +370,6 @@
 				]
 			}
 		},
-		"_options": {
-			"type": "object,null",
-			"description": "Set of options to change how inputs behave in the editor",
-			"additionalProperties": {
-				"type": "object",
-				"properties": {
-					"bold": {
-						"type": "boolean"
-					},
-					"italic": {
-						"type": "boolean"
-					},
-					"removeformat": {
-						"type": "boolean"
-					},
-					"link": {
-						"type": "boolean"
-					},
-					"undo": {
-						"type": "boolean"
-					},
-					"redo": {
-						"type": "boolean"
-					},
-					"underline": {
-						"type": "boolean"
-					},
-					"strike": {
-						"type": "boolean"
-					},
-					"subscript": {
-						"type": "boolean"
-					},
-					"superscript": {
-						"type": "boolean"
-					},
-					"code": {
-						"type": "boolean"
-					},
-					"format": {
-						"type": "boolean,string"
-					},
-					"blockquote": {
-						"type": "boolean"
-					},
-					"horizontalrule": {
-						"type": "boolean"
-					},
-					"numberedlist": {
-						"type": "boolean"
-					},
-					"bulletedlist": {
-						"type": "boolean"
-					},
-					"outdent": {
-						"type": "boolean"
-					},
-					"indent": {
-						"type": "boolean"
-					},
-					"image": {
-						"type": "boolean"
-					},
-					"embed": {
-						"type": "boolean"
-					},
-					"table": {
-						"type": "boolean"
-					},
-					"styles": {
-						"type": "string",
-						"description": "The path or URL to the stylesheet used for editor styles."
-					},
-					"left": {
-						"type": "boolean,string"
-					},
-					"center": {
-						"type": "boolean,string"
-					},
-					"right": {
-						"type": "boolean,string"
-					},
-					"justify": {
-						"type": "boolean,string"
-					}
-				}
-			}
-		},
 		"_select_data": {
 			"type": "object,null",
 			"description": "Data source for populating select and multiselect inputs in the editor",
@@ -457,7 +377,7 @@
 				"type": "object,array"
 			}
 		},
-		"_source_editor": {
+		"source_editor": {
 			"type": "object,null",
 			"description": "Visual adjustments for the source editor",
 			"properties": {
